@@ -1,15 +1,17 @@
 {% extends 'base.html' %} {% block content %}
-<a href="{% url 'citas-create' %}"
-  ><i class="bi bi-plus-circle"></i> Crear cita</a
->
+
 <div class="center">
   <h2>Mi lista de Citas</h2>
+  <a href="{% url 'citas-create' %}"
+    ><i class="bi bi-plus-circle"></i> Nueva cita</a
+  >
   {% if citas %}
-  <ul class="tasks">
+  <ul class="citas">
     {% for citas in citas %}
     <li>
       <a href="#" class="{% if citas.completed %}completed{% endif %}">
-        {{ citas.paciente.nombres }}
+        {{ citas.paciente.nombre }} {{ citas.paciente.apellidos }} ( {{
+        citas.especialidad.nombre }} ) - {{ citas.fechaCita }}
       </a>
       <div class="task-controls">
         <div class="container-task">
@@ -28,7 +30,7 @@
     {% endfor %}
   </ul>
   {% else %}
-  <p>🎉 ¡Hey! Qué mal, no tienes citas</p>
+  <p>No existen citas programadas</p>
   {% endif %}
 </div>
 {% endblock %}
